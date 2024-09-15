@@ -135,4 +135,39 @@ class CustomerController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return response()->json(['message' => 'Customer not found'], 404);
+        }
+
+        return response()->json($customer, 200);
+    }
+
+    public function destroy($id)
+    {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return response()->json(['message' => 'Customer not found'], 404);
+        }
+
+        try {
+            $customer->delete();
+            return response()->json(['message' => 'Customer deleted'], 200);
+        } catch (QueryException $e) {
+            return response()->json([
+                'error' => 'Database error',
+                'message' => $e->getMessage()
+            ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An unexpected error occurred',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 }
