@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +27,12 @@ Route::prefix('customers')->group(function () {
     Route::put('/{id}', [CustomerController::class, 'update']);
     Route::delete('/{id}', [CustomerController::class, 'destroy']);
 });
+
+Route::prefix('cars')->group(function () {
+    Route::get('/', [CarController::class, 'index']);
+    Route::post('/', [CarController::class, 'store']);
+    Route::get('/{id}', [CarController::class, 'show']);
+    Route::put('/{id}', [CarController::class, 'update']);
+    Route::delete('/{id}', [CarController::class, 'destroy']);
+});
+
