@@ -20,4 +20,11 @@ class Car extends Model
     public function customer() {
         return $this->belongsTo(Customer::class);
     }
+
+    public function services()
+    {
+        return $this->belongsToMany(ServiceTask::class, 'car_services')
+                    ->withPivot('status')
+                    ->withTimestamps();
+    }
 }
