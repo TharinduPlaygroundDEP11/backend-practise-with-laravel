@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CarServiceController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,3 +37,9 @@ Route::prefix('cars')->group(function () {
     Route::delete('/{id}', [CarController::class, 'destroy']);
 });
 
+Route::get('/search-customer', [CarServiceController::class, 'searchCustomer']);
+Route::get('/initiate-services/{carId}', [CarServiceController::class, 'initiateServices']);
+Route::post('/store-services', [CarServiceController::class, 'storeServices']);
+
+Route::get('/current-jobs', [CarServiceController::class, 'currentJobs']);
+Route::post('/update-job-status/{id}', [CarServiceController::class, 'updateJobStatus']);
